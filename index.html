@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta Importante</title>
+</head>
+<body>
+    <h1>¿Quieres ser mi novia?</h1>
+    <input type="text" id="respuesta" placeholder="Escribe sí o no">
+    <button onclick="enviarRespuesta()">Enviar</button>
+    <p id="mensaje"></p>
+
+    <script>
+        async function enviarRespuesta() {
+            const respuesta = document.getElementById("respuesta").value;
+            const respuestaLimpia = respuesta.toLowerCase().trim();
+
+            const mensaje = document.getElementById("mensaje");
+
+            if (respuestaLimpia === "sí" || respuestaLimpia === "si") {
+                mensaje.innerText = "¡Qué alegría! ❤️";
+            } else if (respuestaLimpia === "no") {
+                mensaje.innerText = "Entiendo, gracias por tu sinceridad. 😊";
+            } else {
+                mensaje.innerText = "Respuesta no válida. Por favor responde con 'sí' o 'no'.";
+            }
+        }
+    </script>
+</body>
+</html>
