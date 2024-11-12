@@ -14,8 +14,15 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            overflow: hidden;
         }
-        
+
+        .mensaje {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
         .corazon-grande {
             font-size: 100px; /* Tamaño grande para el corazón */
             color: #a64ca6; /* Color morado */
@@ -25,9 +32,23 @@
             margin: 20px;
             text-align: center;
         }
+
+        /* Estilo de globos y caras tristes */
+        .animacion {
+            position: absolute;
+            animation: subir 3s ease-out forwards;
+            font-size: 2em;
+        }
+
+        /* Animación para que suban */
+        @keyframes subir {
+            0% { bottom: 0; opacity: 1; }
+            100% { bottom: 100%; opacity: 0; }
+        }
     </style>
 </head>
 <body>
+    <div class="mensaje">Mi renacuajo blanco con cola larga</div>
     <div class="corazon-grande">💜</div> <!-- Corazón grande -->
     <h1>¿Quieres ser mi novia?</h1>
     <input type="text" id="respuesta" placeholder="Escribe sí o no">
@@ -38,15 +59,30 @@
         function enviarRespuesta() {
             const respuesta = document.getElementById("respuesta").value;
             const respuestaLimpia = respuesta.toLowerCase().trim();
-
             const mensaje = document.getElementById("mensaje");
 
             if (respuestaLimpia === "sí" || respuestaLimpia === "si") {
-                mensaje.innerText = "¡Ahhh no chaoo! 💜";
+                mensaje.innerText = "¡Ahhh no chaooo! ❤️";
+                crearAnimacion("🎈", 20); // Muestra globos morados
             } else if (respuestaLimpia === "no") {
                 mensaje.innerText = "Entiendo, gracias por tu sinceridad. 😊";
+                crearAnimacion("😢", 20); // Muestra caras tristes
             } else {
                 mensaje.innerText = "Respuesta no válida. Por favor responde con 'sí' o 'no'.";
+            }
+        }
+
+        function crearAnimacion(simbolo, cantidad) {
+            for (let i = 0; i < cantidad; i++) {
+                const emoji = document.createElement("div");
+                emoji.classList.add("animacion");
+                emoji.textContent = simbolo;
+                emoji.style.left = Math.random() * 100 + "vw";
+                emoji.style.animationDelay = Math.random() * 2 + "s";
+                document.body.appendChild(emoji);
+
+                // Elimina el emoji después de la animación
+                emoji.addEventListener("animationend", () => emoji.remove());
             }
         }
     </script>
